@@ -31,9 +31,9 @@ func move_camera(delta: float):
 			former_velocity = $Player.velocity
 		hurry_up = hurry_up + (0.6 * delta)
 		
-	var min_zoom = 20
+	var min_zoom = 18
 	
-	var zoom_float = min_zoom + $Player.velocity.length() / 4
+	var zoom_float = min_zoom + $Player.velocity.length() / 3
 	
 	$CameraPivot/Camera3D.size = move_toward_float($CameraPivot/Camera3D.size, zoom_float, 0.2)
 	

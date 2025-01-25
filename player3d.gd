@@ -23,10 +23,13 @@ func get_input():
 	animate_tire_tracks(target_velocity)
 
 func _physics_process(delta: float) -> void:
-	get_input()
-	rotation.y += rotation_direction * rotation_speed * delta
-	if (not is_on_floor()):
+	if (is_on_floor()):
+		get_input()
+	else:
+		animate_tire_tracks(velocity)
 		velocity.y = velocity.y - (9.8 * delta)
+	rotation.y += rotation_direction * rotation_speed * delta
+
 	move_and_slide()
 
 func animate_tire_tracks(target_speed: Vector3):

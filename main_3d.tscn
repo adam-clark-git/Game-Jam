@@ -1,8 +1,9 @@
-[gd_scene load_steps=6 format=3 uid="uid://ok5o4g7v1qdm"]
+[gd_scene load_steps=10 format=3 uid="uid://ok5o4g7v1qdm"]
 
 [ext_resource type="Script" path="res://main_3d.gd" id="1_6g5xf"]
 [ext_resource type="PackedScene" uid="uid://cg8kmc6qi2lec" path="res://3dplayer.tscn" id="1_e8gr2"]
 [ext_resource type="PackedScene" uid="uid://cnxp375602fmj" path="res://block.tscn" id="3_g8ny8"]
+[ext_resource type="Texture2D" uid="uid://djh20rjx5inwf" path="res://art/StylizedWoodPlanks/StylizedWoodPlanks_05/StylizedWoodPlanks_05_basecolor.jpg" id="4_68fij"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_eyqyr"]
 size = Vector3(100, 2, 100)
@@ -10,16 +11,26 @@ size = Vector3(100, 2, 100)
 [sub_resource type="BoxMesh" id="BoxMesh_y6xxv"]
 size = Vector3(100, 2, 100)
 
+[sub_resource type="BoxShape3D" id="BoxShape3D_tvoea"]
+size = Vector3(1, 20, 20)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_d4vhv"]
+albedo_texture = ExtResource("4_68fij")
+
+[sub_resource type="BoxMesh" id="BoxMesh_486vf"]
+material = SubResource("StandardMaterial3D_d4vhv")
+size = Vector3(1, 20, 20)
+
 [node name="Main3D" type="Node"]
 script = ExtResource("1_6g5xf")
 
-[node name="StaticBody3D" type="StaticBody3D" parent="."]
+[node name="Floor" type="StaticBody3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1, 0)
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Floor"]
 shape = SubResource("BoxShape3D_eyqyr")
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="StaticBody3D"]
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Floor"]
 mesh = SubResource("BoxMesh_y6xxv")
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
@@ -40,3 +51,14 @@ size = 40.0
 
 [node name="RigidBody3D" parent="." instance=ExtResource("3_g8ny8")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10, 0.453058, 0)
+
+[node name="Ramp" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.70253, 0, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Ramp"]
+transform = Transform3D(0.173648, -0.984808, 0, 0.984808, 0.173648, 0, 0, 0, 1, 0, 0, 0)
+shape = SubResource("BoxShape3D_tvoea")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Ramp"]
+transform = Transform3D(0.173648, -0.984808, 0, 0.984808, 0.173648, 0, 0, 0, 1, 0, 0, 0)
+mesh = SubResource("BoxMesh_486vf")
