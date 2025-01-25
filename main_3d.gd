@@ -24,7 +24,7 @@ func move_camera(delta: float):
 	else:
 		if (hurry_up ==0.01 ):
 			_camera_shake(0.2, 0.2)
-		$CameraPivot.position = $CameraPivot.position.move_toward(target_cam_pos, 0.2 + hurry_up)
+		$CameraPivot.position = $CameraPivot.position.move_toward(target_cam_pos, 0.01 + hurry_up)
 		fast_cam_move = false
 		if ($CameraPivot.position == target_cam_pos):
 			fast_cam_move = true

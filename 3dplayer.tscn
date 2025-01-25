@@ -1,7 +1,7 @@
 [gd_scene load_steps=9 format=3 uid="uid://cg8kmc6qi2lec"]
 
 [ext_resource type="Script" path="res://player3d.gd" id="1_63v4m"]
-[ext_resource type="PackedScene" uid="uid://xasfglmdok1f" path="res://art/Square Car 1/Square Car 1/Square Car 1.dae" id="1_qril7"]
+[ext_resource type="PackedScene" uid="uid://c4xqw8ekxt7mm" path="res://fun_car.tscn" id="2_rhi31"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_6fkqn"]
 height = 1.8775
@@ -37,11 +37,12 @@ transform = Transform3D(-6.3163e-08, -1.445, 0, -6.3163e-08, 2.76094e-15, -1.445
 shape = SubResource("CapsuleShape3D_6fkqn")
 
 [node name="Pivot" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.607093, 0, 0)
 
-[node name="Square Car 1" parent="Pivot" instance=ExtResource("1_qril7")]
+[node name="Square Car 1" parent="Pivot" instance=ExtResource("2_rhi31")]
 
 [node name="TireTracks" type="GPUParticles3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.37992, -0.78473, 0.00172204)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.766941, -0.78473, 0.00172204)
 amount = 150
 lifetime = 5.0
 process_material = SubResource("ParticleProcessMaterial_4xugs")

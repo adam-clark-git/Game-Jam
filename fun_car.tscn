@@ -1,0 +1,193 @@
+[gd_scene load_steps=7 format=3 uid="uid://c4xqw8ekxt7mm"]
+
+[ext_resource type="PackedScene" uid="uid://xasfglmdok1f" path="res://art/Square Car 1/Square Car 1/Square Car 1.dae" id="1_e15iu"]
+
+[sub_resource type="Animation" id="Animation_fdnw5"]
+resource_name = "Spin Wheels"
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Cylinder_006:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(0, 1.5708, 1.5708), Vector3(-6.28319, 1.5708, 1.5708)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Cylinder_003:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(0, 1.5708, 1.5708), Vector3(-6.28319, 1.5708, 1.5708)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Cylinder_007:rotation")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(0, -1.5708, 1.5708), Vector3(6.28319, -1.5708, 1.5708)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Cylinder_005:rotation")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(0, -1.5708, 1.5708), Vector3(6.28319, -1.5708, 1.5708)]
+}
+
+[sub_resource type="Animation" id="Animation_kf28a"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Cylinder_006:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(1.5708, 0, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Cylinder_003:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(1.5708, 0, 0)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Cylinder_007:rotation")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(-1.5708, 0, 0)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Cylinder_005:rotation")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(-1.5708, 0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_4vp0c"]
+resource_name = "turn_right"
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Cylinder_005:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(-1.5708, -0.785398, 0), Vector3(-1.5708, -0.785398, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Cylinder_006:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(1.5708, -0.785398, 0), Vector3(1.5708, -0.785398, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_i7h7i"]
+resource_name = "turn_left"
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Cylinder_005:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(-1.5708, 0.785398, 0), Vector3(-1.5708, 0.785398, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Cylinder_006:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(1.5708, 0.785398, 0), Vector3(1.5708, 0.785398, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_cpnuf"]
+_data = {
+"RESET": SubResource("Animation_kf28a"),
+"Spin Wheels": SubResource("Animation_fdnw5"),
+"turn_left": SubResource("Animation_i7h7i"),
+"turn_right": SubResource("Animation_4vp0c")
+}
+
+[node name="Square Car 1" instance=ExtResource("1_e15iu")]
+
+[node name="Cylinder_005" parent="." index="8"]
+transform = Transform3D(0.23, 0, 0, 0, -6.26373e-09, 0.23, 0, -0.143297, -1.00536e-08, -0.27501, -0.521984, -0.464426)
+
+[node name="Cylinder_007" parent="." index="9"]
+transform = Transform3D(0.23, 0, 0, 0, -6.26373e-09, 0.23, 0, -0.143297, -1.00536e-08, 1.39896, -0.521984, -0.506704)
+
+[node name="Cylinder_003" parent="." index="10"]
+transform = Transform3D(0.23, 0, 0, 0, -6.26373e-09, -0.23, 0, 0.143297, -1.00536e-08, 1.39896, -0.521984, 0.482083)
+
+[node name="Cylinder_006" parent="." index="11"]
+transform = Transform3D(0.23, 0, 0, 0, -6.26373e-09, -0.23, 0, 0.143297, -1.00536e-08, -0.27501, -0.521984, 0.482083)
+
+[node name="Camera" parent="." index="14"]
+fov = 75.0
+
+[node name="AnimationPlayer" parent="." index="17"]
+libraries = {
+"": SubResource("AnimationLibrary_cpnuf")
+}
+autoplay = "turn_right"

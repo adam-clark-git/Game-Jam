@@ -10,7 +10,12 @@ func get_input():
 	rotation_direction = -Input.get_axis("turn_left", "turn_right")
 	var target_velocity = transform.basis.x * -Input.get_axis("move_back", "move_forward") * speed 
 	
-	
+	if (rotation_direction > 0):
+		$"Pivot/Square Car 1/AnimationPlayer".play("turn_left")
+	elif (rotation_direction < 0):
+		$"Pivot/Square Car 1/AnimationPlayer".play("turn_right")
+	else:
+		$"Pivot/Square Car 1/AnimationPlayer".play("Spin Wheels")
 	if (target_velocity != Vector3.ZERO):
 		velocity = velocity.move_toward(target_velocity, acceleration)
 	
