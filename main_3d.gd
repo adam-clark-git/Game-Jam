@@ -1,6 +1,6 @@
 extends Node
 
-
+var former_velocity = Vector3.ZERO
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	pass # Replace with function body.
@@ -10,8 +10,13 @@ func move_camera():
 	var target_cam_pos = $Player.position
 	target_cam_pos.x += ($Player.velocity.x/2.0)
 	target_cam_pos.z += ($Player.velocity.z/2.0)
-	if !abs(target_cam_pos.x - $CameraPivot.position.x) > 20 and !abs(target_cam_pos.z - $CameraPivot.position.z) > 20: 
+	if not abs($Player.velocity.length() - former_velocity.length()) > 1: 
 		$CameraPivot.position = target_cam_pos
+		former_velocity = $Player.velocity
+	else:
+		$CameraPivot.position = $CameraPivot.position.move_toward(target_cam_pos, 0.2)
+		if ($CameraPivot.position == target_cam_pos):
+			former_velocity = $Player.velocity
 		
 	var min_zoom = 20
 	
