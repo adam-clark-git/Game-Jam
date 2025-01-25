@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3 uid="uid://baglmptga0tei"]
+
+[ext_resource type="PackedScene" uid="uid://xasfglmdok1f" path="res://art/Square Car 1/Square Car 1/Square Car 1.dae" id="1_j0rq0"]
+
+[node name="Square Car 1" instance=ExtResource("1_j0rq0")]
+
+[node name="Camera" parent="." index="14"]
+fov = 75.0

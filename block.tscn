@@ -1,0 +1,24 @@
+[gd_scene load_steps=6 format=3 uid="uid://cnxp375602fmj"]
+
+[ext_resource type="Texture2D" uid="uid://dk8ya0bvuvyw2" path="res://art/StylizedWoodPlanks/StylizedWoodPlanks_01/StylizedWoodPlanks_01_basecolor.jpg" id="1_v4804"]
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_f1eoc"]
+friction = 0.0
+bounce = 4.65
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_8jh8a"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_e3u2y"]
+albedo_texture = ExtResource("1_v4804")
+
+[sub_resource type="BoxMesh" id="BoxMesh_vreqf"]
+material = SubResource("StandardMaterial3D_e3u2y")
+
+[node name="RigidBody3D" type="RigidBody3D"]
+physics_material_override = SubResource("PhysicsMaterial_f1eoc")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("BoxShape3D_8jh8a")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+mesh = SubResource("BoxMesh_vreqf")
