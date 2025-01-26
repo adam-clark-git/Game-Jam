@@ -33,7 +33,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.902258, 0)
 script = ExtResource("1_63v4m")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
-transform = Transform3D(-6.3163e-08, -1.445, 0, -6.3163e-08, 2.76094e-15, -1.445, 1.445, -6.3163e-08, -6.3163e-08, 0.525, -0.345, 0)
+transform = Transform3D(-6.3163e-08, -1.445, 0, -6.3163e-08, 2.76094e-15, -1.445, 1.445, -6.3163e-08, -6.3163e-08, -0.0591875, -0.231834, -0.0251775)
 shape = SubResource("CapsuleShape3D_6fkqn")
 
 [node name="Pivot" type="Node3D" parent="."]
@@ -43,7 +43,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.607093, 0, 0)
 
 [node name="TireTracks" type="GPUParticles3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.766941, -0.78473, 0.00172204)
-amount = 150
+amount = 300
 lifetime = 5.0
 process_material = SubResource("ParticleProcessMaterial_4xugs")
 draw_pass_1 = SubResource("CylinderMesh_3t0wl")

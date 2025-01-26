@@ -15,7 +15,8 @@ func move_camera(delta: float):
 	var target_cam_pos = $Player.position
 	target_cam_pos.x += ($Player.velocity.x/2.0)
 	target_cam_pos.z += ($Player.velocity.z/2.0)
-	# To prevent Jerkiness
+	# To prevent Jerkiness\
+	
 	if not abs($Player.velocity.length() - former_velocity.length()) > 1 && fast_cam_move: 
 		fast_cam_move = true
 		hurry_up = 0.01
