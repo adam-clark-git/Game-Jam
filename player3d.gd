@@ -2,8 +2,9 @@ extends CharacterBody3D
 
 @export var speed = 40
 @export var rotation_speed = 2.0
-@export var acceleration = 0.2;
-@export var friction = 0.08;
+@export var acceleration = 0.2
+@export var friction = 0.08
+@export var life = 3
 
 signal update_position(currentPosition : Vector3)
 var rotation_direction = 0

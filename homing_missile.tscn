@@ -12,6 +12,7 @@ albedo_color = Color(0.268398, 0.268398, 0.268398, 1)
 material = SubResource("StandardMaterial3D_qp1ek")
 
 [node name="Homing_Missile" type="CharacterBody3D" groups=["missiles"]]
+collision_layer = 2
 script = ExtResource("1_sxovi")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]

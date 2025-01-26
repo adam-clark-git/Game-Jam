@@ -26,7 +26,7 @@ size = Vector3(1, 20, 20)
 script = ExtResource("1_6g5xf")
 
 [node name="Homing_Missile" parent="." instance=ExtResource("2_sbhub")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.537971, 11.272)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.537971, 16.3799)
 
 [node name="Floor" type="StaticBody3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1, 0)

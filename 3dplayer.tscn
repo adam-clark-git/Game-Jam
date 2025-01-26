@@ -4,6 +4,7 @@
 [ext_resource type="PackedScene" uid="uid://c4xqw8ekxt7mm" path="res://fun_car.tscn" id="2_rhi31"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_6fkqn"]
+radius = 0.399
 height = 1.8775
 
 [sub_resource type="Curve" id="Curve_f71yi"]
@@ -33,7 +34,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.902258, 0)
 script = ExtResource("1_63v4m")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
-transform = Transform3D(-6.3163e-08, -1.445, 0, -6.3163e-08, 2.76094e-15, -1.445, 1.445, -6.3163e-08, -6.3163e-08, -0.0591875, -0.231834, -0.0251775)
+transform = Transform3D(-6.3163e-08, -1.445, 0, -6.3163e-08, 2.76094e-15, -1.445, 1.445, -6.3163e-08, -6.3163e-08, -0.0591875, -0.176762, -0.0251775)
 shape = SubResource("CapsuleShape3D_6fkqn")
 
 [node name="Pivot" type="Node3D" parent="."]
@@ -42,7 +43,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.607093, 0, 0)
 [node name="Square Car 1" parent="Pivot" instance=ExtResource("2_rhi31")]
 
 [node name="TireTracks" type="GPUParticles3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.766941, -0.78473, 0.00172204)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.766941, -0.734355, 0.00172204)
 amount = 300
 lifetime = 5.0
 process_material = SubResource("ParticleProcessMaterial_4xugs")
