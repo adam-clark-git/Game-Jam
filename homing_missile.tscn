@@ -1,6 +1,7 @@
-[gd_scene load_steps=5 format=3 uid="uid://xjxjcb6ncd10"]
+[gd_scene load_steps=6 format=3 uid="uid://xjxjcb6ncd10"]
 
 [ext_resource type="Script" path="res://homing_missile.gd" id="1_sxovi"]
+[ext_resource type="PackedScene" uid="uid://dufiktjib77yq" path="res://vfx_explosion.tscn" id="2_i54yj"]
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_uv17y"]
 
@@ -13,7 +14,9 @@ material = SubResource("StandardMaterial3D_qp1ek")
 
 [node name="Homing_Missile" type="CharacterBody3D" groups=["missiles"]]
 collision_layer = 2
+collision_mask = 2
 script = ExtResource("1_sxovi")
+vfx_explosion = ExtResource("2_i54yj")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 shape = SubResource("SphereShape3D_uv17y")
@@ -23,4 +26,10 @@ mesh = SubResource("SphereMesh_2q2mh")
 
 [node name="VisibleOnScreenNotifier3D" type="VisibleOnScreenNotifier3D" parent="."]
 
+[node name="Timer" type="Timer" parent="."]
+wait_time = 10.0
+one_shot = true
+autostart = true
+
 [connection signal="screen_exited" from="VisibleOnScreenNotifier3D" to="." method="_on_visible_on_screen_notifier_3d_screen_exited"]
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

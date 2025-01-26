@@ -1,6 +1,8 @@
 extends CharacterBody3D
 @export var speed = 10
+@export var vfx_explosion: PackedScene
 var player_position
+
 func _ready() -> void:
 	pass
 
@@ -27,3 +29,12 @@ func _on_visible_on_screen_notifier_3d_screen_exited() -> void:
 func find_player_position(player_position_local: Vector3):
 	player_position = player_position_local
 	
+
+func explode():
+	var explosion = vfx_explosion.instantiate()
+	add_child(explosion)
+	print("done")
+	$CollisionShape3D.disabled = true
+	$MeshInstance3D.visible = false
+func _on_timer_timeout() -> void:
+	explode()

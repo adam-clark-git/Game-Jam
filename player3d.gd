@@ -6,6 +6,7 @@ extends CharacterBody3D
 @export var friction = 0.08
 @export var life = 3
 
+
 signal update_position(currentPosition : Vector3)
 var rotation_direction = 0
 func get_input():
@@ -31,8 +32,23 @@ func _physics_process(delta: float) -> void:
 		animate_tire_tracks(velocity)
 		velocity.y = velocity.y - (9.8 * delta)
 	rotation.y += rotation_direction * rotation_speed * delta
+	
+	for index in range(get_slide_collision_count()):
+		var collision = get_slide_collision(index)
 
+		# If the collision is with ground
+		if collision.get_collider() == null:
+			continue
+
+		# If the collider is with a mob
+		if collision.get_collider().is_in_group("missiles"):
+			var missile = collision.get_collider()
+			# we check that we are hitting it from above.
+			missile.explode()
+			life -= 1
+			print(life)
 	move_and_slide()
+	
 	emit_signal("update_position", position)
 
 func animate_tire_tracks(target_speed: Vector3):

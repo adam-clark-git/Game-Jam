@@ -1,7 +1,8 @@
-[gd_scene load_steps=24 format=3 uid="uid://dufiktjib77yq"]
+[gd_scene load_steps=25 format=3 uid="uid://dufiktjib77yq"]
 
 [ext_resource type="Texture2D" uid="uid://pa68gbtf11nr" path="res://art/textures/Flare00.PNG" id="1_8mmc5"]
-[ext_resource type="Material" uid="uid://brygufe1nfmym" path="res://art/materials/matflare.tres" id="2_155wq"]
+[ext_resource type="Script" path="res://vfx_explosion.gd" id="1_prpfu"]
+[ext_resource type="Material" uid="uid://x4hdi0tabyb6" path="res://art/materials/matflare.material" id="3_336ip"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_je443"]
 transparency = 1
@@ -113,6 +114,7 @@ color = Color(0.0646965, 0.0646965, 0.0646965, 1)
 
 [node name="vfx_explosion" type="Node3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.09923, 0)
+script = ExtResource("1_prpfu")
 
 [node name="sparks" type="GPUParticles3D" parent="."]
 material_override = SubResource("StandardMaterial3D_je443")
@@ -126,7 +128,7 @@ process_material = SubResource("ParticleProcessMaterial_o26ho")
 draw_pass_1 = SubResource("QuadMesh_adpys")
 
 [node name="flash" type="GPUParticles3D" parent="."]
-material_override = ExtResource("2_155wq")
+material_override = ExtResource("3_336ip")
 emitting = false
 amount = 1
 lifetime = 0.1
@@ -137,7 +139,7 @@ process_material = SubResource("ParticleProcessMaterial_d4ltk")
 draw_pass_1 = SubResource("QuadMesh_7pjh1")
 
 [node name="fire" type="GPUParticles3D" parent="."]
-material_override = ExtResource("2_155wq")
+material_override = ExtResource("3_336ip")
 emitting = false
 amount = 13
 lifetime = 0.55
@@ -148,7 +150,7 @@ process_material = SubResource("ParticleProcessMaterial_pna5m")
 draw_pass_1 = SubResource("QuadMesh_byc3v")
 
 [node name="smoke" type="GPUParticles3D" parent="."]
-material_override = ExtResource("2_155wq")
+material_override = ExtResource("3_336ip")
 emitting = false
 amount = 10
 lifetime = 0.8
@@ -157,3 +159,5 @@ explosiveness = 1.0
 fixed_fps = 60
 process_material = SubResource("ParticleProcessMaterial_xdebm")
 draw_pass_1 = SubResource("QuadMesh_oglqc")
+
+[connection signal="finished" from="smoke" to="." method="_on_smoke_finished"]
