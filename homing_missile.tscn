@@ -1,0 +1,25 @@
+[gd_scene load_steps=5 format=3 uid="uid://xjxjcb6ncd10"]
+
+[ext_resource type="Script" path="res://homing_missile.gd" id="1_sxovi"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_uv17y"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_qp1ek"]
+vertex_color_use_as_albedo = true
+albedo_color = Color(0.268398, 0.268398, 0.268398, 1)
+
+[sub_resource type="SphereMesh" id="SphereMesh_2q2mh"]
+material = SubResource("StandardMaterial3D_qp1ek")
+
+[node name="Homing_Missile" type="CharacterBody3D" groups=["missiles"]]
+script = ExtResource("1_sxovi")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("SphereShape3D_uv17y")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+mesh = SubResource("SphereMesh_2q2mh")
+
+[node name="VisibleOnScreenNotifier3D" type="VisibleOnScreenNotifier3D" parent="."]
+
+[connection signal="screen_exited" from="VisibleOnScreenNotifier3D" to="." method="_on_visible_on_screen_notifier_3d_screen_exited"]

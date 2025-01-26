@@ -1,7 +1,8 @@
-[gd_scene load_steps=10 format=3 uid="uid://ok5o4g7v1qdm"]
+[gd_scene load_steps=11 format=3 uid="uid://ok5o4g7v1qdm"]
 
 [ext_resource type="Script" path="res://main_3d.gd" id="1_6g5xf"]
 [ext_resource type="PackedScene" uid="uid://cg8kmc6qi2lec" path="res://3dplayer.tscn" id="1_e8gr2"]
+[ext_resource type="PackedScene" uid="uid://xjxjcb6ncd10" path="res://homing_missile.tscn" id="2_sbhub"]
 [ext_resource type="PackedScene" uid="uid://cnxp375602fmj" path="res://block.tscn" id="3_g8ny8"]
 [ext_resource type="Texture2D" uid="uid://djh20rjx5inwf" path="res://art/StylizedWoodPlanks/StylizedWoodPlanks_05/StylizedWoodPlanks_05_basecolor.jpg" id="4_68fij"]
 
@@ -23,6 +24,9 @@ size = Vector3(1, 20, 20)
 
 [node name="Main3D" type="Node"]
 script = ExtResource("1_6g5xf")
+
+[node name="Homing_Missile" parent="." instance=ExtResource("2_sbhub")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.537971, 11.272)
 
 [node name="Floor" type="StaticBody3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1, 0)

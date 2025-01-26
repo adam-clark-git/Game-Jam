@@ -5,6 +5,7 @@ extends CharacterBody3D
 @export var acceleration = 0.2;
 @export var friction = 0.08;
 
+signal update_position(currentPosition : Vector3)
 var rotation_direction = 0
 func get_input():
 	rotation_direction = -Input.get_axis("turn_left", "turn_right")
@@ -31,6 +32,7 @@ func _physics_process(delta: float) -> void:
 	rotation.y += rotation_direction * rotation_speed * delta
 
 	move_and_slide()
+	emit_signal("update_position", position)
 
 func animate_tire_tracks(target_speed: Vector3):
 	if (velocity.distance_to(target_speed) > 30):

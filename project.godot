@@ -24,6 +24,10 @@ window/stretch/mode="canvas_items"
 
 project/assembly_name="Car 2D Project"
 
+[global_group]
+
+missiles=""
+
 [input]
 
 turn_left={

@@ -38,9 +38,15 @@ func move_camera(delta: float):
 	
 	$CameraPivot/Camera3D.size = move_toward_float($CameraPivot/Camera3D.size, zoom_float, 0.2)
 	
+
+
+
+func lock_on():
+	get_tree().call_group("missiles", "find_player_position", $Player.position)
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
 	move_camera(delta)
+	lock_on()
 
 
 func _camera_shake(magnitude: float, period: float):
