@@ -1,10 +1,13 @@
-[gd_scene load_steps=11 format=3 uid="uid://ok5o4g7v1qdm"]
+[gd_scene load_steps=17 format=3 uid="uid://ok5o4g7v1qdm"]
 
 [ext_resource type="Script" path="res://main_3d.gd" id="1_6g5xf"]
 [ext_resource type="PackedScene" uid="uid://cg8kmc6qi2lec" path="res://3dplayer.tscn" id="1_e8gr2"]
 [ext_resource type="PackedScene" uid="uid://xjxjcb6ncd10" path="res://homing_missile.tscn" id="2_sbhub"]
 [ext_resource type="PackedScene" uid="uid://cnxp375602fmj" path="res://block.tscn" id="3_g8ny8"]
+[ext_resource type="PackedScene" uid="uid://dufiktjib77yq" path="res://vfx_explosion.tscn" id="3_hb8c5"]
 [ext_resource type="Texture2D" uid="uid://djh20rjx5inwf" path="res://art/StylizedWoodPlanks/StylizedWoodPlanks_05/StylizedWoodPlanks_05_basecolor.jpg" id="4_68fij"]
+[ext_resource type="PackedScene" uid="uid://dji8tkhu6rqlk" path="res://meeple.tscn" id="6_egxfi"]
+[ext_resource type="PackedScene" uid="uid://csuetyklyjgw3" path="res://ui.tscn" id="8_dq8jy"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_eyqyr"]
 size = Vector3(100, 2, 100)
@@ -22,11 +25,26 @@ albedo_texture = ExtResource("4_68fij")
 material = SubResource("StandardMaterial3D_d4vhv")
 size = Vector3(1, 20, 20)
 
+[sub_resource type="CylinderMesh" id="CylinderMesh_aikvs"]
+top_radius = 5.0
+bottom_radius = 5.0
+height = 10.0
+
+[sub_resource type="Curve3D" id="Curve3D_yxvo7"]
+_data = {
+"points": PackedVector3Array(0, 0, 0, 0, 0, 0, 105.604, 2.08612, -105.489, 0, 0, 0, 0, 0, 0, 105.581, 2.08215, 101.493, 0, 0, 0, 0, 0, 0, -101.401, 1.91742, 101.47, 0, 0, 0, 0, 0, 0, -101.255, 1.92142, -100.467, 0, 0, 0, 0, 0, 0, 105.604, 0.0861206, -105.489),
+"tilts": PackedFloat32Array(0, 0, 0, 0, 0)
+}
+point_count = 5
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_p2ann"]
+size = Vector3(300, 10, 300)
+
 [node name="Main3D" type="Node"]
 script = ExtResource("1_6g5xf")
-
-[node name="Homing_Missile" parent="." instance=ExtResource("2_sbhub")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.537971, 16.3799)
+missile = ExtResource("2_sbhub")
+explosion = ExtResource("3_hb8c5")
+meeple = ExtResource("6_egxfi")
 
 [node name="Floor" type="StaticBody3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1, 0)
@@ -66,3 +84,52 @@ shape = SubResource("BoxShape3D_tvoea")
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Ramp"]
 transform = Transform3D(0.173648, -0.984808, 0, 0.984808, 0.173648, 0, 0, 0, 1, 0, 0, 0)
 mesh = SubResource("BoxMesh_486vf")
+
+[node name="Reference" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Reference"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 100, 0, -100)
+mesh = SubResource("CylinderMesh_aikvs")
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="Reference"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -100, 0, -100)
+mesh = SubResource("CylinderMesh_aikvs")
+
+[node name="MeshInstance3D3" type="MeshInstance3D" parent="Reference"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -100, 0, 100)
+mesh = SubResource("CylinderMesh_aikvs")
+skeleton = NodePath("../MeshInstance3D2")
+
+[node name="MeshInstance3D4" type="MeshInstance3D" parent="Reference"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 100, 0, 100)
+mesh = SubResource("CylinderMesh_aikvs")
+
+[node name="MissileSystem" type="Node" parent="."]
+
+[node name="MissileSpawnPath" type="Path3D" parent="MissileSystem"]
+curve = SubResource("Curve3D_yxvo7")
+
+[node name="MissileSpawner" type="PathFollow3D" parent="MissileSystem/MissileSpawnPath"]
+transform = Transform3D(-1, -2.19184e-09, 0.000114354, 0, 0.999996, 1.91673e-05, -0.000114354, 1.91672e-05, -1, 105.604, 2.08612, -105.489)
+
+[node name="MissileSpawnTimer" type="Timer" parent="MissileSystem"]
+wait_time = 5.0
+autostart = true
+
+[node name="DeathPlane" type="Area3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -10, 0)
+collision_layer = 0
+collision_mask = 2
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="DeathPlane"]
+shape = SubResource("BoxShape3D_p2ann")
+
+[node name="UI" parent="." instance=ExtResource("8_dq8jy")]
+offset_left = 70.0
+offset_top = 42.0
+offset_right = 127.0
+offset_bottom = 80.0
+
+[connection signal="timeout" from="MissileSystem/MissileSpawnTimer" to="." method="_on_missile_spawn_timer_timeout"]
+[connection signal="body_entered" from="DeathPlane" to="." method="_on_death_plane_body_entered"]

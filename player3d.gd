@@ -5,6 +5,7 @@ extends CharacterBody3D
 @export var acceleration = 0.2
 @export var friction = 0.08
 @export var life = 3
+var powerup = 0
 
 
 signal update_position(currentPosition : Vector3)
@@ -21,7 +22,12 @@ func get_input():
 		$"Pivot/Square Car 1/AnimationPlayer".play("Spin Wheels")
 	if (target_velocity != Vector3.ZERO):
 		velocity = velocity.move_toward(target_velocity, acceleration)
-	
+	if (Input.is_action_just_pressed("boost")):
+		if powerup == 0:
+			velocity.y = 12;
+		if powerup == 1:
+			acceleration = acceleration * 2
+
 	velocity = velocity.move_toward(Vector3.ZERO, friction)
 	animate_tire_tracks(target_velocity)
 
@@ -30,7 +36,7 @@ func _physics_process(delta: float) -> void:
 		get_input()
 	else:
 		animate_tire_tracks(velocity)
-		velocity.y = velocity.y - (9.8 * delta)
+		velocity.y = velocity.y - (16 * delta)
 	rotation.y += rotation_direction * rotation_speed * delta
 	
 	for index in range(get_slide_collision_count()):
@@ -43,7 +49,6 @@ func _physics_process(delta: float) -> void:
 		# If the collider is with a mob
 		if collision.get_collider().is_in_group("missiles"):
 			var missile = collision.get_collider()
-			# we check that we are hitting it from above.
 			missile.explode()
 			life -= 1
 			print(life)
