@@ -52,6 +52,7 @@ func _physics_process(delta: float) -> void:
 			missile.explode()
 			life -= 1
 			print(life)
+			break
 	move_and_slide()
 	
 	emit_signal("update_position", position)
