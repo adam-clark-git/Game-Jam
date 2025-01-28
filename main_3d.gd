@@ -12,6 +12,7 @@ var points = 0
 func _ready() -> void:
 	spawn_missile()
 	spawn_meeple()
+	$UI/Retry.hide()
 
 
 func move_camera(delta: float):
@@ -101,16 +102,21 @@ func spawn_meeple():
 	
 func add_point():
 	points +=1
+	$UI/Score.text = "Points: %s" % points
 	spawn_meeple()
+	$MissileSystem/MissileSpawnTimer.wait_time = $MissileSystem/MissileSpawnTimer.wait_time / 1.1
 func explode_missile(missile_position: Vector3):
 	var explosion = explosion.instantiate()
 	explosion.position = missile_position
 	add_child(explosion)
 func player_dies():
-	print("DEATH")
+	$UI/Retry.show()
 func _on_missile_spawn_timer_timeout() -> void:
 	spawn_missile()
 
-
+func _unhandled_input(event):
+	if event.is_action_pressed("ui_accept") and $UI/Retry.visible:
+		# This restarts the current scene.
+		get_tree().reload_current_scene()
 func _on_death_plane_body_entered(body: Node3D) -> void:
 	player_dies()

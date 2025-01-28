@@ -18,10 +18,8 @@ albedo_color = Color(0.157426, 0.524981, 0.255177, 0.168627)
 material = SubResource("StandardMaterial3D_kjp6h")
 top_radius = 5.0
 bottom_radius = 5.0
-height = 0.5
 
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_qhtxp"]
-height = 0.5
 radius = 5.0
 
 [sub_resource type="Animation" id="Animation_34202"]
@@ -30,7 +28,7 @@ loop_mode = 1
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("MeshInstance3D:position")
+tracks/0/path = NodePath("MeshCharacter:position")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -45,7 +43,7 @@ length = 0.001
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("MeshInstance3D:position")
+tracks/0/path = NodePath("MeshCharacter:position")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -66,7 +64,7 @@ collision_layer = 8
 collision_mask = 2
 script = ExtResource("1_m35lp")
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+[node name="MeshCharacter" type="MeshInstance3D" parent="."]
 mesh = SubResource("CapsuleMesh_s750j")
 
 [node name="CollisionIndicator" type="MeshInstance3D" parent="."]
@@ -81,5 +79,14 @@ shape = SubResource("CylinderShape3D_qhtxp")
 libraries = {
 "": SubResource("AnimationLibrary_dkfpx")
 }
+autoplay = "move"
+
+[node name="Control" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Sprite2D" type="Sprite2D" parent="Control"]
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]

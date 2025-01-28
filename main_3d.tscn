@@ -32,7 +32,7 @@ height = 10.0
 
 [sub_resource type="Curve3D" id="Curve3D_yxvo7"]
 _data = {
-"points": PackedVector3Array(0, 0, 0, 0, 0, 0, 105.604, 2.08612, -105.489, 0, 0, 0, 0, 0, 0, 105.581, 2.08215, 101.493, 0, 0, 0, 0, 0, 0, -101.401, 1.91742, 101.47, 0, 0, 0, 0, 0, 0, -101.255, 1.92142, -100.467, 0, 0, 0, 0, 0, 0, 105.604, 0.0861206, -105.489),
+"points": PackedVector3Array(0, 0, 0, 0, 0, 0, 71.6044, 2.08612, -69.4886, 0, 0, 0, 0, 0, 0, 76.5807, 2.08215, 72.4935, 0, 0, 0, 0, 0, 0, -70.4013, 1.91742, 71.4697, 0, 0, 0, 0, 0, 0, -71.2551, 1.92142, -71.4669, 0, 0, 0, 0, 0, 0, 71.6044, 2.08612, -69.4886),
 "tilts": PackedFloat32Array(0, 0, 0, 0, 0)
 }
 point_count = 5
@@ -61,6 +61,7 @@ shadow_enabled = true
 
 [node name="Player" parent="." instance=ExtResource("1_e8gr2")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.78, 0)
+collision_mask = 1
 
 [node name="CameraPivot" type="Marker3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 0.707107, 0.707107, 0, -0.707107, 0.707107, 0, 0, 0)
@@ -86,7 +87,7 @@ transform = Transform3D(0.173648, -0.984808, 0, 0.984808, 0.173648, 0, 0, 0, 1, 
 mesh = SubResource("BoxMesh_486vf")
 
 [node name="Reference" type="Node3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0)
+transform = Transform3D(0.725, 0, 0, 0, 0.725, 0, 0, 0, 0.725, 0, 2, 0)
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Reference"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 100, 0, -100)
@@ -111,7 +112,7 @@ mesh = SubResource("CylinderMesh_aikvs")
 curve = SubResource("Curve3D_yxvo7")
 
 [node name="MissileSpawner" type="PathFollow3D" parent="MissileSystem/MissileSpawnPath"]
-transform = Transform3D(-1, -2.19184e-09, 0.000114354, 0, 0.999996, 1.91673e-05, -0.000114354, 1.91672e-05, -1, 105.604, 2.08612, -105.489)
+transform = Transform3D(-0.999385, 9.78137e-07, -0.0350274, 0, 0.999996, 2.7925e-05, 0.0350274, 2.79078e-05, -0.999385, 71.6044, 2.08612, -69.4886)
 
 [node name="MissileSpawnTimer" type="Timer" parent="MissileSystem"]
 wait_time = 5.0
@@ -126,10 +127,6 @@ collision_mask = 2
 shape = SubResource("BoxShape3D_p2ann")
 
 [node name="UI" parent="." instance=ExtResource("8_dq8jy")]
-offset_left = 70.0
-offset_top = 42.0
-offset_right = 127.0
-offset_bottom = 80.0
 
 [connection signal="timeout" from="MissileSystem/MissileSpawnTimer" to="." method="_on_missile_spawn_timer_timeout"]
 [connection signal="body_entered" from="DeathPlane" to="." method="_on_death_plane_body_entered"]

@@ -37,7 +37,7 @@ shape = SubResource("SphereShape3D_d5hxo")
 [node name="VisibleOnScreenNotifier3D" type="VisibleOnScreenNotifier3D" parent="."]
 
 [node name="Timer" type="Timer" parent="."]
-wait_time = 5.0
+wait_time = 10.0
 one_shot = true
 
 [node name="Graphic" type="Node3D" parent="."]
