@@ -7,14 +7,14 @@ func _on_body_entered(body: Node3D) -> void:
 		emit_signal("point_earned")
 		collected = true
 		$CollisionIndicator.visible = false
-		$AnimationPlayer.speed_scale = 2.0
+		$AnimationPlayer.speed_scale = 5.0
 		player = body
 	
 func _physics_process(delta: float) -> void:
 	if (collected):
 
 		position = position.move_toward(player.position, 0.1)
-		var awesome = Vector3(delta*2,delta*2,delta*2)
+		var awesome = Vector3(delta*1,delta*1,delta*1)
 		if (scale > Vector3(0,0,0)):
 			scale = scale - awesome
 		else:

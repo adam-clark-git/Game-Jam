@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://xjxjcb6ncd10"]
+[gd_scene load_steps=18 format=3 uid="uid://xjxjcb6ncd10"]
 
 [ext_resource type="Script" path="res://homing_missile.gd" id="1_sxovi"]
 [ext_resource type="PackedScene" uid="uid://dufiktjib77yq" path="res://vfx_explosion.tscn" id="2_i54yj"]
@@ -26,6 +26,82 @@ albedo_color = Color(0, 0, 0, 1)
 material = SubResource("StandardMaterial3D_3yae5")
 radius = 0.05
 height = 0.1
+
+[sub_resource type="Gradient" id="Gradient_bxmkh"]
+offsets = PackedFloat32Array(0.304545, 0.736364)
+colors = PackedColorArray(0, 0, 0, 1, 0.658625, 0.279047, 0.0903946, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_ufyma"]
+gradient = SubResource("Gradient_bxmkh")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_ul3xg"]
+emission_shape = 1
+emission_sphere_radius = 1.0
+angle_min = 1.07288e-05
+angle_max = 360.0
+direction = Vector3(0, 0, 1)
+spread = 0.0
+initial_velocity_min = 2.0
+initial_velocity_max = 10.0
+angular_velocity_min = -1.60933e-05
+angular_velocity_max = 40.0
+gravity = Vector3(0, 0, 0)
+linear_accel_min = 0.999998
+linear_accel_max = 5.0
+scale_min = 0.1
+color = Color(0.882448, 0.362702, 0.197068, 1)
+color_initial_ramp = SubResource("GradientTexture1D_ufyma")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_5npke"]
+transparency = 1
+blend_mode = 1
+shading_mode = 0
+vertex_color_use_as_albedo = true
+billboard_mode = 3
+billboard_keep_scale = true
+particles_anim_h_frames = 1
+particles_anim_v_frames = 1
+particles_anim_loop = false
+
+[sub_resource type="QuadMesh" id="QuadMesh_qkt2i"]
+material = SubResource("StandardMaterial3D_5npke")
+
+[sub_resource type="Animation" id="Animation_5x6vq"]
+resource_name = "blinking"
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Graphic/Body:mesh:material:albedo_color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.533333, 1),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Color(0, 0, 0, 1), Color(0.760207, 0.449918, 0.0901201, 1), Color(0, 0, 0, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_iqm62"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Graphic/Body:mesh:material:albedo_color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(0, 0, 0, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_fekgn"]
+_data = {
+"RESET": SubResource("Animation_iqm62"),
+"blinking": SubResource("Animation_5x6vq")
+}
 
 [node name="Homing_Missile" type="CharacterBody3D" groups=["missiles"]]
 script = ExtResource("1_sxovi")
@@ -84,6 +160,20 @@ mesh = SubResource("SphereMesh_arivv")
 [node name="Pupil2" type="MeshInstance3D" parent="Graphic"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.171067, 0.127705, 0.289742)
 mesh = SubResource("SphereMesh_arivv")
+
+[node name="Flames" type="GPUParticles3D" parent="."]
+transform = Transform3D(0.23, 0, 0, 0, 0.23, 0, 0, 0, 0.23, 0, 0, 0.742696)
+amount = 200
+lifetime = 0.3
+local_coords = true
+draw_order = 3
+process_material = SubResource("ParticleProcessMaterial_ul3xg")
+draw_pass_1 = SubResource("QuadMesh_qkt2i")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_fekgn")
+}
 
 [connection signal="screen_entered" from="VisibleOnScreenNotifier3D" to="." method="_on_visible_on_screen_notifier_3d_screen_entered"]
 [connection signal="screen_exited" from="VisibleOnScreenNotifier3D" to="." method="_on_visible_on_screen_notifier_3d_screen_exited"]

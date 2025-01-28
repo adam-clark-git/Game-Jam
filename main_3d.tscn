@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=3 uid="uid://ok5o4g7v1qdm"]
+[gd_scene load_steps=18 format=3 uid="uid://ok5o4g7v1qdm"]
 
 [ext_resource type="Script" path="res://main_3d.gd" id="1_6g5xf"]
 [ext_resource type="PackedScene" uid="uid://cg8kmc6qi2lec" path="res://3dplayer.tscn" id="1_e8gr2"]
@@ -8,6 +8,7 @@
 [ext_resource type="Texture2D" uid="uid://djh20rjx5inwf" path="res://art/StylizedWoodPlanks/StylizedWoodPlanks_05/StylizedWoodPlanks_05_basecolor.jpg" id="4_68fij"]
 [ext_resource type="PackedScene" uid="uid://dji8tkhu6rqlk" path="res://meeple.tscn" id="6_egxfi"]
 [ext_resource type="PackedScene" uid="uid://csuetyklyjgw3" path="res://ui.tscn" id="8_dq8jy"]
+[ext_resource type="PackedScene" uid="uid://cok2kl60ddim" path="res://tesla_coil.tscn" id="9_4yfq8"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_eyqyr"]
 size = Vector3(100, 2, 100)
@@ -112,7 +113,7 @@ mesh = SubResource("CylinderMesh_aikvs")
 curve = SubResource("Curve3D_yxvo7")
 
 [node name="MissileSpawner" type="PathFollow3D" parent="MissileSystem/MissileSpawnPath"]
-transform = Transform3D(-0.999385, 9.78137e-07, -0.0350274, 0, 0.999996, 2.7925e-05, 0.0350274, 2.79078e-05, -0.999385, 71.6044, 2.08612, -69.4886)
+transform = Transform3D(-0.999385, 9.78783e-07, -0.0350274, 0, 0.999996, 2.79434e-05, 0.0350274, 2.79262e-05, -0.999385, 71.6044, 2.08612, -69.4886)
 
 [node name="MissileSpawnTimer" type="Timer" parent="MissileSystem"]
 wait_time = 5.0
@@ -127,6 +128,9 @@ collision_mask = 2
 shape = SubResource("BoxShape3D_p2ann")
 
 [node name="UI" parent="." instance=ExtResource("8_dq8jy")]
+
+[node name="TeslaCoil" parent="." instance=ExtResource("9_4yfq8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 16)
 
 [connection signal="timeout" from="MissileSystem/MissileSpawnTimer" to="." method="_on_missile_spawn_timer_timeout"]
 [connection signal="body_entered" from="DeathPlane" to="." method="_on_death_plane_body_entered"]
