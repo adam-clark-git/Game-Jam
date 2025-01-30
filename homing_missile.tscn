@@ -4,14 +4,11 @@
 [ext_resource type="PackedScene" uid="uid://dufiktjib77yq" path="res://vfx_explosion.tscn" id="2_i54yj"]
 [ext_resource type="Material" uid="uid://dmoi05spb10k2" path="res://art/materials/missile.material" id="3_utak5"]
 
-[sub_resource type="SphereShape3D" id="SphereShape3D_d5hxo"]
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_7h1yb"]
+radius = 0.3
+height = 1.8
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_kgcpb"]
-transparency = 1
-vertex_color_use_as_albedo = true
-albedo_color = Color(0.760784, 0.45098, 0.0901961, 1)
-metallic = 0.5
-roughness = 0.55
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_yol62"]
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_tvf6a"]
 material = ExtResource("3_utak5")
@@ -74,35 +71,10 @@ particles_anim_loop = false
 material = SubResource("StandardMaterial3D_5npke")
 
 [sub_resource type="Animation" id="Animation_iqm62"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Graphic/Body:material_overlay")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [SubResource("StandardMaterial3D_kgcpb")]
-}
 
 [sub_resource type="Animation" id="Animation_5x6vq"]
 resource_name = "blinking"
 loop_mode = 1
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Graphic/Body:material_overlay")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.166667, 0.4),
-"transitions": PackedFloat32Array(1, 1, 1),
-"update": 1,
-"values": [null, null, SubResource("StandardMaterial3D_kgcpb")]
-}
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_fekgn"]
 _data = {
@@ -112,10 +84,12 @@ _data = {
 
 [node name="Homing_Missile" type="CharacterBody3D" groups=["missiles"]]
 script = ExtResource("1_sxovi")
+speed = 8
 vfx_explosion = ExtResource("2_i54yj")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
-shape = SubResource("SphereShape3D_d5hxo")
+transform = Transform3D(1.91069e-15, 4.37114e-08, 1, 1, -4.37114e-08, 0, 4.37114e-08, 1, -4.37114e-08, 0, 0, 0)
+shape = SubResource("CapsuleShape3D_7h1yb")
 
 [node name="VisibleOnScreenNotifier3D" type="VisibleOnScreenNotifier3D" parent="."]
 
@@ -128,7 +102,7 @@ transform = Transform3D(-1.5, 0, 1.31134e-07, 0, 1.5, 0, -1.31134e-07, 0, -1.5, 
 
 [node name="Body" type="MeshInstance3D" parent="Graphic"]
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0)
-material_overlay = SubResource("StandardMaterial3D_kgcpb")
+material_overlay = SubResource("ShaderMaterial_yol62")
 mesh = SubResource("CapsuleMesh_tvf6a")
 
 [node name="FinHolder" type="Node3D" parent="Graphic"]

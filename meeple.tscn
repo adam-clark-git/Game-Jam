@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://dji8tkhu6rqlk"]
+[gd_scene load_steps=11 format=3 uid="uid://dji8tkhu6rqlk"]
 
 [ext_resource type="Script" path="res://meeple.gd" id="1_m35lp"]
 
@@ -36,6 +36,30 @@ tracks/0/keys = {
 "update": 0,
 "values": [Vector3(0, 0, 0)]
 }
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("CollisionIndicator:transparency")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("CollisionShape3D2:disabled")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
 
 [sub_resource type="Animation" id="Animation_34202"]
 resource_name = "move"
@@ -53,10 +77,51 @@ tracks/0/keys = {
 "values": [Vector3(0, 0, 0), Vector3(0, 0.25, 0), Vector3(0, 0, 0)]
 }
 
+[sub_resource type="Animation" id="Animation_7nfow"]
+resource_name = "spawn"
+length = 2.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("CollisionIndicator:transparency")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(1, 1.83333),
+"transitions": PackedFloat32Array(4.75683, 1),
+"update": 0,
+"values": [1.0, 0.0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("CollisionShape3D2:disabled")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(1.06667, 1.86667),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("MeshCharacter:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(0.5, 1),
+"update": 0,
+"values": [Vector3(0, -2, 0), Vector3(0, 0, 0)]
+}
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_dkfpx"]
 _data = {
 "RESET": SubResource("Animation_aqqws"),
-"move": SubResource("Animation_34202")
+"move": SubResource("Animation_34202"),
+"spawn": SubResource("Animation_7nfow")
 }
 
 [node name="Meeple" type="Area3D"]
@@ -79,7 +144,6 @@ shape = SubResource("CylinderShape3D_qhtxp")
 libraries = {
 "": SubResource("AnimationLibrary_dkfpx")
 }
-autoplay = "move"
 
 [node name="Control" type="Control" parent="."]
 layout_mode = 3

@@ -23,3 +23,5 @@ func begin(x: float, z: float):
 	position.x = x
 	position.z = z
 	position.y = 1
+	$AnimationPlayer.play("spawn")
+	$AnimationPlayer.queue("move")
