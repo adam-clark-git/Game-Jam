@@ -6,7 +6,9 @@ var fast_cam_move = true
 @export var missile: PackedScene
 @export var explosion: PackedScene
 @export var meeple: PackedScene
+@export var tesla: PackedScene
 var points = 0
+var spawnLocations = Array([], TYPE_OBJECT, "Vector2", null)
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -81,6 +83,9 @@ func move_toward_float(current: float, goal: float, accel: float):
 	var step = min(abs(direction), accel) * sign(direction)
 	return current + step
 
+
+
+# SPAWNING STUFF
 func spawn_missile():
 	var currentMissile = missile.instantiate()
 	var mob_spawn_location = get_node("MissileSystem/MissileSpawnPath/MissileSpawner")
@@ -94,16 +99,43 @@ func spawn_missile():
 	
 func spawn_meeple():
 	var newMeeple = meeple.instantiate()
-	var spawnLocationX = randf_range(-40,40)
-	var spawnLocationY = randf_range(-40,40)
-	newMeeple.begin(spawnLocationX,spawnLocationY)
+	var spawnLocation = find_unoccupied_space()
+	newMeeple.begin(spawnLocation.x,spawnLocation.y)
 	add_child(newMeeple)
 	newMeeple.point_earned.connect(add_point)
 	
+func spawn_tesla():
+	var newTesla = tesla.instantiate()
+	var spawnLocation = find_unoccupied_space()
+	spawnLocations.append(spawnLocation)
+	newTesla.begin(spawnLocation.x,spawnLocation.y)
+	add_child(newTesla)
+	newTesla.zap_player.connect(tesla_shock)
+	newTesla.spawn_animation()	
+func tesla_shock():
+	_on_player_take_damage()
+func find_unoccupied_space():
+	var succeed = false
+	var spawnLocationX
+	var spawnLocationY
+	var i = 0;
+	while (not succeed || i > 300):
+		succeed = true
+		print("PANIC")
+		spawnLocationX = randf_range(-40,40)
+		spawnLocationY = randf_range(-40,40)
+		for location in spawnLocations:
+			if (abs(spawnLocationX - location.x) > 3):
+				succeed = false
+			if (abs(spawnLocationY - location.y) > 3):
+				succeed = false
+		i +=1
+	return Vector2(spawnLocationX, spawnLocationY)
 func add_point():
 	points +=1
 	$UI/Score.text = "Points: %s" % points
 	spawn_meeple()
+	spawn_tesla()
 	$MissileSystem/MissileSpawnTimer.wait_time = $MissileSystem/MissileSpawnTimer.wait_time / 1.1
 func explode_missile(missile_position: Vector3):
 	var explosion = explosion.instantiate()
@@ -120,3 +152,9 @@ func _unhandled_input(event):
 		get_tree().reload_current_scene()
 func _on_death_plane_body_entered(body: Node3D) -> void:
 	player_dies()
+
+
+func _on_player_take_damage() -> void:
+	$Player.life = $Player.life - 1
+	_camera_shake(0.2,0.2)
+	print($Player.life)

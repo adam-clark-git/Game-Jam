@@ -1,5 +1,6 @@
 extends CharacterBody3D
 
+signal take_damage
 @export var speed = 40
 @export var rotation_speed = 2.0
 @export var acceleration = 0.2
@@ -50,8 +51,7 @@ func _physics_process(delta: float) -> void:
 		if collision.get_collider().is_in_group("missiles"):
 			var missile = collision.get_collider()
 			missile.explode()
-			life -= 1
-			print(life)
+			emit_signal("take_damage")
 			break
 	move_and_slide()
 	

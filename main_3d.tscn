@@ -46,6 +46,7 @@ script = ExtResource("1_6g5xf")
 missile = ExtResource("2_sbhub")
 explosion = ExtResource("3_hb8c5")
 meeple = ExtResource("6_egxfi")
+tesla = ExtResource("9_4yfq8")
 
 [node name="Floor" type="StaticBody3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1, 0)
@@ -129,8 +130,6 @@ shape = SubResource("BoxShape3D_p2ann")
 
 [node name="UI" parent="." instance=ExtResource("8_dq8jy")]
 
-[node name="TeslaCoil" parent="." instance=ExtResource("9_4yfq8")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 16)
-
+[connection signal="take_damage" from="Player" to="." method="_on_player_take_damage"]
 [connection signal="timeout" from="MissileSystem/MissileSpawnTimer" to="." method="_on_missile_spawn_timer_timeout"]
 [connection signal="body_entered" from="DeathPlane" to="." method="_on_death_plane_body_entered"]

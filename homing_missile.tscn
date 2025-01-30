@@ -1,10 +1,17 @@
-[gd_scene load_steps=18 format=3 uid="uid://xjxjcb6ncd10"]
+[gd_scene load_steps=19 format=3 uid="uid://xjxjcb6ncd10"]
 
 [ext_resource type="Script" path="res://homing_missile.gd" id="1_sxovi"]
 [ext_resource type="PackedScene" uid="uid://dufiktjib77yq" path="res://vfx_explosion.tscn" id="2_i54yj"]
 [ext_resource type="Material" uid="uid://dmoi05spb10k2" path="res://art/materials/missile.material" id="3_utak5"]
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_d5hxo"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_kgcpb"]
+transparency = 1
+vertex_color_use_as_albedo = true
+albedo_color = Color(0.760784, 0.45098, 0.0901961, 1)
+metallic = 0.5
+roughness = 0.55
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_tvf6a"]
 material = ExtResource("3_utak5")
@@ -66,35 +73,35 @@ particles_anim_loop = false
 [sub_resource type="QuadMesh" id="QuadMesh_qkt2i"]
 material = SubResource("StandardMaterial3D_5npke")
 
+[sub_resource type="Animation" id="Animation_iqm62"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Graphic/Body:material_overlay")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [SubResource("StandardMaterial3D_kgcpb")]
+}
+
 [sub_resource type="Animation" id="Animation_5x6vq"]
 resource_name = "blinking"
 loop_mode = 1
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("Graphic/Body:mesh:material:albedo_color")
+tracks/0/path = NodePath("Graphic/Body:material_overlay")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.533333, 1),
+"times": PackedFloat32Array(0, 0.166667, 0.4),
 "transitions": PackedFloat32Array(1, 1, 1),
-"update": 0,
-"values": [Color(0, 0, 0, 1), Color(0.760207, 0.449918, 0.0901201, 1), Color(0, 0, 0, 1)]
-}
-
-[sub_resource type="Animation" id="Animation_iqm62"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Graphic/Body:mesh:material:albedo_color")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Color(0, 0, 0, 1)]
+"update": 1,
+"values": [null, null, SubResource("StandardMaterial3D_kgcpb")]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_fekgn"]
@@ -117,10 +124,11 @@ wait_time = 10.0
 one_shot = true
 
 [node name="Graphic" type="Node3D" parent="."]
-transform = Transform3D(-1.5, 0, -1.31134e-07, 0, 1.5, 0, 1.31134e-07, 0, -1.5, -0.00464296, -0.0133301, 0.00136627)
+transform = Transform3D(-1.5, 0, 1.31134e-07, 0, 1.5, 0, -1.31134e-07, 0, -1.5, -0.00464296, -0.0133301, 0.00136627)
 
 [node name="Body" type="MeshInstance3D" parent="Graphic"]
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0)
+material_overlay = SubResource("StandardMaterial3D_kgcpb")
 mesh = SubResource("CapsuleMesh_tvf6a")
 
 [node name="FinHolder" type="Node3D" parent="Graphic"]

@@ -17,10 +17,8 @@ func _physics_process(delta: float) -> void:
 		velocity = velocity.move_toward(multiply_vector3(direction, speed), acceleration)
 		look_at(velocity + position)
 	move_and_slide()
-	if ($Timer.time_left < 3 && not $Timer.is_stopped() && not $AnimationPlayer.is_playing()):
+	if ($Timer.time_left < 3 && $Timer.time_left > 2.9):
 		$AnimationPlayer.play("blinking")
-	else:
-		$AnimationPlayer.stop()
 
 func multiply_vector3(vector: Vector3, mult: float):
 	vector.x = vector.x * mult

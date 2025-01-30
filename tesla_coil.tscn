@@ -1,6 +1,7 @@
-[gd_scene load_steps=7 format=3 uid="uid://cok2kl60ddim"]
+[gd_scene load_steps=11 format=3 uid="uid://cok2kl60ddim"]
 
 [ext_resource type="Material" uid="uid://cdt3nutdtl10l" path="res://art/materials/tesla.material" id="1_2mrnf"]
+[ext_resource type="Script" path="res://tesla_coil.gd" id="1_xh6ij"]
 
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_60tkq"]
 height = 1.0
@@ -15,18 +16,106 @@ top_radius = 1.0
 bottom_radius = 1.0
 height = 0.5
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ogqkf"]
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_y8vbh"]
 transparency = 1
 vertex_color_use_as_albedo = true
 albedo_color = Color(0.607843, 0.247059, 0.196078, 0.372549)
 
-[sub_resource type="CylinderMesh" id="CylinderMesh_ugrrk"]
-material = SubResource("StandardMaterial3D_ogqkf")
+[sub_resource type="CylinderMesh" id="CylinderMesh_a5lcy"]
+material = SubResource("StandardMaterial3D_y8vbh")
 top_radius = 5.0
 bottom_radius = 5.0
 height = 1.0
 
+[sub_resource type="Animation" id="Animation_a8itp"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("CollisionShape3D:disabled")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Node3D:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 1, 0)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("MeshInstance3D:transparency")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+
+[sub_resource type="Animation" id="Animation_iiua3"]
+resource_name = "spawn"
+length = 2.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("CollisionShape3D:disabled")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Node3D:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 1.5),
+"transitions": PackedFloat32Array(0.453, 1),
+"update": 0,
+"values": [Vector3(0, -2, 0), Vector3(0, 1, 0)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("MeshInstance3D:transparency")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(1.5, 2),
+"transitions": PackedFloat32Array(1, 0.148651),
+"update": 0,
+"values": [1.0, 0.0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_uv7je"]
+_data = {
+"RESET": SubResource("Animation_a8itp"),
+"spawn": SubResource("Animation_iiua3")
+}
+
 [node name="TeslaCoil" type="Area3D"]
+collision_layer = 0
+collision_mask = 2
+script = ExtResource("1_xh6ij")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 shape = SubResource("CylinderShape3D_60tkq")
@@ -42,4 +131,12 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
 mesh = SubResource("CylinderMesh_1tvfm")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
-mesh = SubResource("CylinderMesh_ugrrk")
+mesh = SubResource("CylinderMesh_a5lcy")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_uv7je")
+}
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="body_exited" from="." to="." method="_on_body_exited"]
