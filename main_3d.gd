@@ -40,7 +40,7 @@ func move_camera(delta: float):
 			former_velocity = $Player.velocity
 		hurry_up = hurry_up + (0.6 * delta)
 		
-	var min_zoom = 18
+	var min_zoom = 24
 	
 	var zoom_float = min_zoom + $Player.velocity.length() / 3
 	
@@ -100,7 +100,7 @@ func spawn_missile():
 func spawn_meeple():
 	var newMeeple = meeple.instantiate()
 	var spawnLocation = find_unoccupied_space()
-	newMeeple.begin(spawnLocation.x,spawnLocation.y)
+	newMeeple.begin(spawnLocation.x,spawnLocation.y, $Player)
 	add_child(newMeeple)
 	newMeeple.point_earned.connect(add_point)
 	
@@ -125,9 +125,7 @@ func find_unoccupied_space():
 		spawnLocationX = randf_range(-40,40)
 		spawnLocationY = randf_range(-40,40)
 		for location in spawnLocations:
-			if (abs(spawnLocationX - location.x) > 3):
-				succeed = false
-			if (abs(spawnLocationY - location.y) > 3):
+			if (abs(spawnLocationX - location.x) < 10 && abs(spawnLocationY - location.y) < 10):
 				succeed = false
 		i +=1
 	return Vector2(spawnLocationX, spawnLocationY)

@@ -13,7 +13,12 @@ signal update_position(currentPosition : Vector3)
 var rotation_direction = 0
 func get_input():
 	rotation_direction = -Input.get_axis("turn_left", "turn_right")
-	var target_velocity = transform.basis.x * -Input.get_axis("move_back", "move_forward") * speed 
+	var target_velocity = Vector3.ZERO
+	if (Input.is_action_pressed("move_forward")):
+		target_velocity = transform.basis.x * -speed
+	if (Input.is_action_pressed("move_back")):
+		target_velocity = transform.basis.x * 0.01
+		$TireTracks.emitting = true
 	
 	if (rotation_direction > 0):
 		$"Pivot/Square Car 1/AnimationPlayer".play("turn_left")

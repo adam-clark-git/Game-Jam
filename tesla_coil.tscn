@@ -131,6 +131,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
 mesh = SubResource("CylinderMesh_1tvfm")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+cast_shadow = 0
 mesh = SubResource("CylinderMesh_a5lcy")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
