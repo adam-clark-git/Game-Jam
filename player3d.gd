@@ -1,6 +1,7 @@
 extends CharacterBody3D
 
 signal take_damage
+signal jump_shake
 @export var speed = 40
 @export var rotation_speed = 2.0
 @export var acceleration = 0.2
@@ -30,7 +31,8 @@ func get_input():
 		velocity = velocity.move_toward(target_velocity, acceleration)
 	if (Input.is_action_just_pressed("boost")):
 		if powerup == 0:
-			velocity.y = 12;
+			velocity.y = 8;
+			emit_signal("jump_shake")
 		if powerup == 1:
 			acceleration = acceleration * 2
 
@@ -42,7 +44,7 @@ func _physics_process(delta: float) -> void:
 		get_input()
 	else:
 		animate_tire_tracks(velocity)
-		velocity.y = velocity.y - (16 * delta)
+		velocity.y = velocity.y - (12 * delta)
 	rotation.y += rotation_direction * rotation_speed * delta
 	
 	for index in range(get_slide_collision_count()):

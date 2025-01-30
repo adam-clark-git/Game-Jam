@@ -8,7 +8,7 @@ var fast_cam_move = true
 @export var meeple: PackedScene
 @export var tesla: PackedScene
 var points = 0
-var spawnLocations = Array([], TYPE_OBJECT, "Vector2", null)
+var spawnLocations = Array()
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -111,30 +111,35 @@ func spawn_tesla():
 	newTesla.begin(spawnLocation.x,spawnLocation.y)
 	add_child(newTesla)
 	newTesla.zap_player.connect(tesla_shock)
-	newTesla.spawn_animation()	
+	newTesla.spawn_animation()
 func tesla_shock():
 	_on_player_take_damage()
 func find_unoccupied_space():
 	var succeed = false
 	var spawnLocationX
-	var spawnLocationY
+	var spawnLocationZ
 	var i = 0;
 	while (not succeed || i > 300):
 		succeed = true
 		print("PANIC")
 		spawnLocationX = randf_range(-40,40)
-		spawnLocationY = randf_range(-40,40)
+		spawnLocationZ = randf_range(-40,40)
 		for location in spawnLocations:
-			if (abs(spawnLocationX - location.x) < 10 && abs(spawnLocationY - location.y) < 10):
+			print("One location tested")
+			var potential_spawn = Vector2(spawnLocationX, spawnLocationZ)
+			print(potential_spawn.distance_to(location))
+			if (potential_spawn.distance_to(location) < 10):
 				succeed = false
 		i +=1
-	return Vector2(spawnLocationX, spawnLocationY)
+	return Vector2(spawnLocationX, spawnLocationZ)
 func add_point():
 	points +=1
 	$UI/Score.text = "Points: %s" % points
+	if (points % 2 == 0):
+		spawn_tesla()
 	spawn_meeple()
-	spawn_tesla()
-	$MissileSystem/MissileSpawnTimer.wait_time = $MissileSystem/MissileSpawnTimer.wait_time / 1.1
+	
+	$MissileSystem/MissileSpawnTimer.wait_time = $MissileSystem/MissileSpawnTimer.wait_time / 1.05
 func explode_missile(missile_position: Vector3):
 	var explosion = explosion.instantiate()
 	explosion.position = missile_position
@@ -156,3 +161,7 @@ func _on_player_take_damage() -> void:
 	$Player.life = $Player.life - 1
 	_camera_shake(0.2,0.2)
 	print($Player.life)
+
+
+func _on_player_jump_shake() -> void:
+	_camera_shake(0.2,0.2)

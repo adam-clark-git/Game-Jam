@@ -11,13 +11,6 @@ func _on_body_entered(body: Node3D) -> void:
 		player = body
 	
 func _physics_process(delta: float) -> void:
-	var canvas = $Control.get_canvas_transform()
-	print(canvas)
-	set_marker_position()
-	set_marker_rotation()
-	set_marker_size()
-	var angle_to_meeple = player.position.angle_to(position)
-	print(angle_to_meeple * (180 / PI))
 	
 	if (collected):
 
@@ -34,17 +27,3 @@ func begin(x: float, z: float, newPlayer: Node3D):
 	player = newPlayer
 	$AnimationPlayer.play("spawn")
 	$AnimationPlayer.queue("move")
-
-func set_marker_size():
-	var icon_size = 0.1 + abs(position - player.position).length() / 500 
-	$Control/Sprite2D.scale = Vector2(icon_size, icon_size)
-func set_marker_position():
-	pass
-func set_marker_rotation():
-	pass
-func _on_visible_on_screen_notifier_3d_screen_entered() -> void:
-	$Control.hide()
-
-
-func _on_visible_on_screen_notifier_3d_screen_exited() -> void:
-	$Control.show()

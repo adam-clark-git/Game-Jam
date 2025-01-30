@@ -130,6 +130,7 @@ shape = SubResource("BoxShape3D_p2ann")
 
 [node name="UI" parent="." instance=ExtResource("8_dq8jy")]
 
+[connection signal="jump_shake" from="Player" to="." method="_on_player_jump_shake"]
 [connection signal="take_damage" from="Player" to="." method="_on_player_take_damage"]
 [connection signal="timeout" from="MissileSystem/MissileSpawnTimer" to="." method="_on_missile_spawn_timer_timeout"]
 [connection signal="body_entered" from="DeathPlane" to="." method="_on_death_plane_body_entered"]
