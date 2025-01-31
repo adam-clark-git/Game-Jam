@@ -146,6 +146,7 @@ func explode_missile(missile_position: Vector3):
 	add_child(explosion)
 func player_dies():
 	$UI/Retry.show()
+	$Player.dead = true
 func _on_missile_spawn_timer_timeout() -> void:
 	spawn_missile()
 

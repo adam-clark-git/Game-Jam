@@ -7,6 +7,7 @@ signal jump_shake
 @export var acceleration = 0.2
 @export var friction = 0.08
 @export var life = 3
+var dead = false
 var powerup = 0
 
 
@@ -40,7 +41,7 @@ func get_input():
 	animate_tire_tracks(target_velocity)
 
 func _physics_process(delta: float) -> void:
-	if (is_on_floor()):
+	if (is_on_floor() and not dead):
 		get_input()
 	else:
 		animate_tire_tracks(velocity)

@@ -13,11 +13,13 @@ config_version=5
 config/name="Game Jam Attempt"
 run/main_scene="res://main_3d.tscn"
 config/features=PackedStringArray("4.3", "Forward Plus")
+config/icon="res://art/icons/DriftHell Icon256.png"
+config/windows_native_icon="res://art/icons/DriftHell Icon ICO.ico"
 
 [display]
 
-window/size/viewport_width=1080
-window/size/viewport_height=720
+window/size/viewport_width=1920
+window/size/viewport_height=1080
 window/size/mode=2
 window/stretch/mode="canvas_items"
 
