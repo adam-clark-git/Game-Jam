@@ -1,8 +1,9 @@
-[gd_scene load_steps=25 format=3 uid="uid://dufiktjib77yq"]
+[gd_scene load_steps=26 format=3 uid="uid://dufiktjib77yq"]
 
 [ext_resource type="Texture2D" uid="uid://pa68gbtf11nr" path="res://art/textures/Flare00.PNG" id="1_8mmc5"]
 [ext_resource type="Script" path="res://vfx_explosion.gd" id="1_prpfu"]
 [ext_resource type="Material" uid="uid://x4hdi0tabyb6" path="res://art/materials/matflare.material" id="3_336ip"]
+[ext_resource type="AudioStream" uid="uid://06dno22npwm4" path="res://art/Sound Effect/Explosion_fixed.mp3" id="4_wc31y"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_je443"]
 transparency = 1
@@ -159,5 +160,12 @@ explosiveness = 1.0
 fixed_fps = 60
 process_material = SubResource("ParticleProcessMaterial_xdebm")
 draw_pass_1 = SubResource("QuadMesh_oglqc")
+
+[node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="."]
+stream = ExtResource("4_wc31y")
+volume_db = -5.0
+unit_size = 30.0
+autoplay = true
+panning_strength = 0.0
 
 [connection signal="finished" from="smoke" to="." method="_on_smoke_finished"]

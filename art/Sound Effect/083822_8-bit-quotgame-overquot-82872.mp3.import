@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://frnffglttoh"
+path="res://.godot/imported/083822_8-bit-quotgame-overquot-82872.mp3-7a2696b2d183d6fc70487b5e17a841f9.mp3str"
+
+[deps]
+
+source_file="res://art/Sound Effect/083822_8-bit-quotgame-overquot-82872.mp3"
+dest_files=["res://.godot/imported/083822_8-bit-quotgame-overquot-82872.mp3-7a2696b2d183d6fc70487b5e17a841f9.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

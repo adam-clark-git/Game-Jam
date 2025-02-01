@@ -10,6 +10,7 @@ func _on_body_entered(body: Node3D) -> void:
 		collected = true;
 		emit_signal("zap_player")
 		print("first entered tesla")
+		$Sizzle.volume_db = -5
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
@@ -24,6 +25,7 @@ func begin(x: float, z: float):
 func _on_body_exited(body: Node3D) -> void:
 	collected = false
 	print("left tesla")
+	$Sizzle.volume_db = -15
 	
 func spawn_animation():
 	print("Animationplayed")

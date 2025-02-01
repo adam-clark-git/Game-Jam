@@ -1,7 +1,11 @@
-[gd_scene load_steps=9 format=3 uid="uid://cg8kmc6qi2lec"]
+[gd_scene load_steps=13 format=3 uid="uid://cg8kmc6qi2lec"]
 
 [ext_resource type="Script" path="res://player3d.gd" id="1_63v4m"]
 [ext_resource type="PackedScene" uid="uid://c4xqw8ekxt7mm" path="res://fun_car.tscn" id="2_rhi31"]
+[ext_resource type="AudioStream" uid="uid://btwp18lfby48a" path="res://art/Sound Effect/idle.mp3" id="3_7ixfa"]
+[ext_resource type="AudioStream" uid="uid://2rhgkxy7ei3c" path="res://art/Sound Effect/on.mp3" id="4_qdgph"]
+[ext_resource type="AudioStream" uid="uid://d0s47waqe10gh" path="res://art/Sound Effect/impact-258054.mp3" id="5_7dem0"]
+[ext_resource type="AudioStream" uid="uid://gmxawd23qnlg" path="res://art/Sound Effect/Skid.wav" id="6_kowcw"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_6fkqn"]
 radius = 0.399
@@ -50,3 +54,30 @@ amount = 300
 lifetime = 5.0
 process_material = SubResource("ParticleProcessMaterial_4xugs")
 draw_pass_1 = SubResource("CylinderMesh_3t0wl")
+
+[node name="Smoke" type="GPUParticles3D" parent="."]
+amount = 50
+
+[node name="AudioListener3D" type="AudioListener3D" parent="."]
+current = true
+
+[node name="Noises" type="Node" parent="."]
+
+[node name="Idle" type="AudioStreamPlayer" parent="Noises"]
+stream = ExtResource("3_7ixfa")
+volume_db = -20.0
+autoplay = true
+
+[node name="Running" type="AudioStreamPlayer" parent="Noises"]
+stream = ExtResource("4_qdgph")
+volume_db = -20.0
+autoplay = true
+
+[node name="Impact" type="AudioStreamPlayer" parent="Noises"]
+stream = ExtResource("5_7dem0")
+volume_db = -10.0
+pitch_scale = 4.0
+
+[node name="Skid" type="AudioStreamPlayer" parent="Noises"]
+stream = ExtResource("6_kowcw")
+volume_db = -20.0

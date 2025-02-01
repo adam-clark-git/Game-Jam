@@ -99,7 +99,7 @@ tracks/1/path = NodePath("CollisionShape3D2:disabled")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
-"times": PackedFloat32Array(1.06667, 1.86667),
+"times": PackedFloat32Array(0, 1.06667),
 "transitions": PackedFloat32Array(1, 1),
 "update": 1,
 "values": [true, false]

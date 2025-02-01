@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://0pej73rksrd8"
+path="res://.godot/imported/Faster_Version-2020-08-17_-_The_Way_Things_Used_To_Work_-_www.FesliyanStudios.com_Steve_Oxen.mp3-e0fefe43af7261aadd3406b3b3bb2fa4.mp3str"
+
+[deps]
+
+source_file="res://art/Sound Effect/Faster_Version-2020-08-17_-_The_Way_Things_Used_To_Work_-_www.FesliyanStudios.com_Steve_Oxen.mp3"
+dest_files=["res://.godot/imported/Faster_Version-2020-08-17_-_The_Way_Things_Used_To_Work_-_www.FesliyanStudios.com_Steve_Oxen.mp3-e0fefe43af7261aadd3406b3b3bb2fa4.mp3str"]
+
+[params]
+
+loop=true
+loop_offset=5.0
+bpm=0
+beat_count=0
+bar_beats=4

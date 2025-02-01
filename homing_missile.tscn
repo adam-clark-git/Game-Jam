@@ -1,8 +1,9 @@
-[gd_scene load_steps=19 format=3 uid="uid://xjxjcb6ncd10"]
+[gd_scene load_steps=20 format=3 uid="uid://xjxjcb6ncd10"]
 
 [ext_resource type="Script" path="res://homing_missile.gd" id="1_sxovi"]
 [ext_resource type="PackedScene" uid="uid://dufiktjib77yq" path="res://vfx_explosion.tscn" id="2_i54yj"]
 [ext_resource type="Material" uid="uid://dmoi05spb10k2" path="res://art/materials/missile.material" id="3_utak5"]
+[ext_resource type="AudioStream" uid="uid://de4osloiju5x2" path="res://art/Sound Effect/jet-engine-6753.mp3" id="4_6b24f"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_7h1yb"]
 radius = 0.3
@@ -156,6 +157,13 @@ draw_pass_1 = SubResource("QuadMesh_qkt2i")
 libraries = {
 "": SubResource("AnimationLibrary_fekgn")
 }
+
+[node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="."]
+stream = ExtResource("4_6b24f")
+volume_db = -20.0
+unit_size = 20.0
+max_db = -20.0
+autoplay = true
 
 [connection signal="screen_entered" from="VisibleOnScreenNotifier3D" to="." method="_on_visible_on_screen_notifier_3d_screen_entered"]
 [connection signal="screen_exited" from="VisibleOnScreenNotifier3D" to="." method="_on_visible_on_screen_notifier_3d_screen_exited"]

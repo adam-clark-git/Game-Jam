@@ -15,7 +15,7 @@ func _ready() -> void:
 	spawn_missile()
 	spawn_meeple()
 	$UI/Retry.hide()
-
+	$UI/Retry/Label2.hide()
 
 func move_camera(delta: float):
 	var target_cam_pos = $Player.position
@@ -92,7 +92,6 @@ func spawn_missile():
 	# And give it a random offset.
 	mob_spawn_location.progress_ratio = randf()
 
-	var player_position = $Player.position
 	currentMissile.initialize(mob_spawn_location.position)
 	add_child(currentMissile)
 	currentMissile.missile_death.connect(explode_missile)
@@ -114,6 +113,9 @@ func spawn_tesla():
 	newTesla.spawn_animation()
 func tesla_shock():
 	_on_player_take_damage()
+	var explosion = explosion.instantiate()
+	explosion.position = $Player.position
+	add_child(explosion)
 func find_unoccupied_space():
 	var succeed = false
 	var spawnLocationX
@@ -134,7 +136,7 @@ func find_unoccupied_space():
 	return Vector2(spawnLocationX, spawnLocationZ)
 func add_point():
 	points +=1
-	$UI/Score.text = "Points: %s" % points
+	$UI/Score.text = "Passengers: %s" % points
 	if (points % 2 == 0):
 		spawn_tesla()
 	spawn_meeple()
@@ -145,15 +147,25 @@ func explode_missile(missile_position: Vector3):
 	explosion.position = missile_position
 	add_child(explosion)
 func player_dies():
+	$Player/Noises/Idle.stop()
+	$Player/Noises/Running.stop()
 	$UI/Retry.show()
 	$Player.dead = true
+	$"Main Menu Theme".stop()
+	await get_tree().create_timer(1.0).timeout
+	$UI/AudioStreamPlayer.play()
+	await get_tree().create_timer(2.0).timeout
+	$UI/Retry/Label2.show()
+	$UI/AudioStreamPlayer2.play()
+	get_tree().paused = true
+	$UI/Retry/Restart.show()
+	$"UI/Retry/Main Menu".show()
+	
+	
+	
 func _on_missile_spawn_timer_timeout() -> void:
 	spawn_missile()
 
-func _unhandled_input(event):
-	if event.is_action_pressed("ui_accept") and $UI/Retry.visible:
-		# This restarts the current scene.
-		get_tree().reload_current_scene()
 func _on_death_plane_body_entered(body: Node3D) -> void:
 	player_dies()
 
@@ -166,3 +178,7 @@ func _on_player_take_damage() -> void:
 
 func _on_player_jump_shake() -> void:
 	_camera_shake(0.2,0.2)
+
+
+func _on_ui_start_game() -> void:
+	get_tree().reload_current_scene()

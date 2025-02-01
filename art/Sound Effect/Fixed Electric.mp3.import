@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://d3eijtax0un6m"
+path="res://.godot/imported/Fixed Electric.mp3-554ab7e0d35df87a358b7950095610ac.mp3str"
+
+[deps]
+
+source_file="res://art/Sound Effect/Fixed Electric.mp3"
+dest_files=["res://.godot/imported/Fixed Electric.mp3-554ab7e0d35df87a358b7950095610ac.mp3str"]
+
+[params]
+
+loop=true
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=3 uid="uid://ok5o4g7v1qdm"]
+[gd_scene load_steps=25 format=3 uid="uid://ok5o4g7v1qdm"]
 
 [ext_resource type="Script" path="res://main_3d.gd" id="1_6g5xf"]
 [ext_resource type="PackedScene" uid="uid://cg8kmc6qi2lec" path="res://3dplayer.tscn" id="1_e8gr2"]
@@ -6,7 +6,9 @@
 [ext_resource type="PackedScene" uid="uid://dufiktjib77yq" path="res://vfx_explosion.tscn" id="3_hb8c5"]
 [ext_resource type="PackedScene" uid="uid://dji8tkhu6rqlk" path="res://meeple.tscn" id="6_egxfi"]
 [ext_resource type="PackedScene" uid="uid://csuetyklyjgw3" path="res://ui.tscn" id="8_dq8jy"]
+[ext_resource type="AudioStream" uid="uid://0pej73rksrd8" path="res://art/Sound Effect/Faster_Version-2020-08-17_-_The_Way_Things_Used_To_Work_-_www.FesliyanStudios.com_Steve_Oxen.mp3" id="8_tb75x"]
 [ext_resource type="PackedScene" uid="uid://cok2kl60ddim" path="res://tesla_coil.tscn" id="9_4yfq8"]
+[ext_resource type="AudioStream" uid="uid://8hqjpqjhgdsf" path="res://art/Sound Effect/ambient-noise-236388.mp3" id="9_7gsgf"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_eyqyr"]
 size = Vector3(100, 2, 100)
@@ -59,8 +61,9 @@ material = SubResource("StandardMaterial3D_tb4s7")
 size = Vector3(50, 2, 50)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_3e0an"]
+shading_mode = 0
 vertex_color_use_as_albedo = true
-albedo_color = Color(1.92523e-07, 0.130941, 0.16842, 1)
+albedo_color = Color(1.19124e-06, 0.255229, 0.31776, 1)
 
 [sub_resource type="BoxMesh" id="BoxMesh_0cjyk"]
 material = SubResource("StandardMaterial3D_3e0an")
@@ -84,9 +87,8 @@ visible = false
 shape = SubResource("BoxShape3D_eyqyr")
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
-transform = Transform3D(-4.37114e-08, -0.866025, 0.5, 0, 0.5, 0.866025, -1, 3.78552e-08, -2.18557e-08, 21, 9, 0)
+transform = Transform3D(-4.37114e-08, -0.866025, 0.5, 0, 0.5, 0.866025, -1, 3.78552e-08, -2.18557e-08, 21, 40.7467, -64.4307)
 shadow_enabled = true
-sky_mode = 1
 
 [node name="Player" parent="." instance=ExtResource("1_e8gr2")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.78, 0)
@@ -150,7 +152,6 @@ shape = SubResource("BoxShape3D_p2ann")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Floor2/FloorNode"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 25, -1, 25)
-cast_shadow = 0
 mesh = SubResource("BoxMesh_phrdr")
 skeleton = NodePath("../..")
 
@@ -182,7 +183,18 @@ skeleton = NodePath("../..")
 [node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D"]
 shape = SubResource("BoxShape3D_4p1yj")
 
+[node name="Main Menu Theme" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("8_tb75x")
+volume_db = -15.0
+autoplay = true
+
+[node name="Ambience" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("9_7gsgf")
+volume_db = -5.0
+autoplay = true
+
 [connection signal="jump_shake" from="Player" to="." method="_on_player_jump_shake"]
 [connection signal="take_damage" from="Player" to="." method="_on_player_take_damage"]
 [connection signal="timeout" from="MissileSystem/MissileSpawnTimer" to="." method="_on_missile_spawn_timer_timeout"]
 [connection signal="body_entered" from="DeathPlane" to="." method="_on_death_plane_body_entered"]
+[connection signal="start_game" from="UI" to="." method="_on_ui_start_game"]

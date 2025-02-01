@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://cbwa70bqk3q86"
+path="res://.godot/imported/Car Skid Sound Effect.mp3-38bc10388a63739350b3f4f784f4f59a.mp3str"
+
+[deps]
+
+source_file="res://art/Sound Effect/Car Skid Sound Effect.mp3"
+dest_files=["res://.godot/imported/Car Skid Sound Effect.mp3-38bc10388a63739350b3f4f784f4f59a.mp3str"]
+
+[params]
+
+loop=true
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://d0s47waqe10gh"
+path="res://.godot/imported/impact-258054.mp3-859e1a40efcfea999346cdbff885e948.mp3str"
+
+[deps]
+
+source_file="res://art/Sound Effect/impact-258054.mp3"
+dest_files=["res://.godot/imported/impact-258054.mp3-859e1a40efcfea999346cdbff885e948.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4
