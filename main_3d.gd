@@ -9,13 +9,16 @@ var fast_cam_move = true
 @export var tesla: PackedScene
 var points = 0
 var spawnLocations = Array()
+var musicOn = true
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	spawn_missile()
-	spawn_meeple()
 	$UI/Retry.hide()
 	$UI/Retry/Label2.hide()
+	$UI.hide()
+	mainMenuSpawn()
+	spawn_missile()
+	spawn_meeple()
 
 func move_camera(delta: float):
 	var target_cam_pos = $Player.position
@@ -140,6 +143,8 @@ func add_point():
 	if (points % 2 == 0):
 		spawn_tesla()
 	spawn_meeple()
+	$PointEarned.play()
+	$PointEarned.pitch_scale = $PointEarned.pitch_scale + 0.1
 	
 	$MissileSystem/MissileSpawnTimer.wait_time = $MissileSystem/MissileSpawnTimer.wait_time / 1.05
 func explode_missile(missile_position: Vector3):
@@ -151,14 +156,13 @@ func player_dies():
 	$Player/Noises/Running.stop()
 	$UI/Retry.show()
 	$Player.dead = true
-	$"Main Menu Theme".stop()
+	$"MainMenuTheme".stop()
 	await get_tree().create_timer(1.0).timeout
 	$UI/AudioStreamPlayer.play()
 	await get_tree().create_timer(2.0).timeout
 	$UI/Retry/Label2.show()
 	$UI/AudioStreamPlayer2.play()
 	get_tree().paused = true
-	$UI/Retry/Restart.show()
 	$"UI/Retry/Main Menu".show()
 	
 	
@@ -182,3 +186,19 @@ func _on_player_jump_shake() -> void:
 
 func _on_ui_start_game() -> void:
 	get_tree().reload_current_scene()
+	
+func mainMenuSpawn():
+	get_tree().paused = true
+
+
+func _on_ui_skip_menu() -> void:
+	$MainMenu.hide()
+	get_tree().paused = false
+	if (musicOn):
+		$MainMenuTheme.volume_db = -15
+	else:
+		$MainMenuTheme.volume_db = -80
+	$UI.show()
+
+func _on_main_menu_toggle_music() -> void:
+	musicOn = not musicOn

@@ -11,6 +11,7 @@ var dead = false
 var powerup = 0
 var overrideTireTracks
 var rotation_direction = 0
+var jumps = 3
 func get_input():
 	overrideTireTracks = false
 	var target_velocity = Vector3.ZERO
@@ -26,13 +27,11 @@ func get_input():
 		velocity = velocity.move_toward(target_velocity, acceleration)
 	
 	if (Input.is_action_just_pressed("boost")):
-		if powerup == 0:
+		if jumps > 0:
 			velocity.y = 8;
-			emit_signal("jump_shake")
-			$Noises/Impact.play()
-		if powerup == 1:
-			acceleration = acceleration * 2
-
+			jumps = jumps -1
+		emit_signal("jump_shake")
+		$Noises/Impact.play()
 	velocity = velocity.move_toward(Vector3.ZERO, friction)
 	animate_tire_tracks(target_velocity)
 

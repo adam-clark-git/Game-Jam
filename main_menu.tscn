@@ -1,8 +1,39 @@
-[gd_scene format=3 uid="uid://bptj8c3wvlgwf"]
+[gd_scene load_steps=10 format=3 uid="uid://bptj8c3wvlgwf"]
+
+[ext_resource type="FontFile" uid="uid://cmy1d3medhkmg" path="res://art/Fonts/Jersey10-Regular.ttf" id="1_ey4b5"]
+[ext_resource type="Script" path="res://main_menu.gd" id="2_xniua"]
+
+[sub_resource type="Theme" id="Theme_vvcbu"]
+default_font = ExtResource("1_ey4b5")
+default_font_size = 60
+
+[sub_resource type="InputEventAction" id="InputEventAction_5q5u3"]
+action = &"restart_game"
+
+[sub_resource type="Shortcut" id="Shortcut_c3efx"]
+events = [SubResource("InputEventAction_5q5u3")]
+
+[sub_resource type="InputEventAction" id="InputEventAction_loifd"]
+action = &"toggle_music"
+
+[sub_resource type="Shortcut" id="Shortcut_yq38k"]
+events = [SubResource("InputEventAction_loifd")]
+
+[sub_resource type="InputEventAction" id="InputEventAction_10gqf"]
+action = &"main_menu"
+
+[sub_resource type="Shortcut" id="Shortcut_gidjr"]
+events = [SubResource("InputEventAction_10gqf")]
 
 [node name="MainMenu" type="Control"]
 layout_mode = 3
-anchors_preset = 0
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = SubResource("Theme_vvcbu")
+script = ExtResource("2_xniua")
 
 [node name="Backround" type="ColorRect" parent="."]
 layout_mode = 1
@@ -11,4 +42,66 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-color = Color(0.27451, 0.27451, 0.74902, 1)
+color = Color(0.27451, 0.27451, 0.74902, 0.360784)
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -0.5
+offset_top = 200.0
+offset_right = 0.5
+offset_bottom = 223.0
+grow_horizontal = 2
+theme_override_font_sizes/font_size = 200
+text = "DRIFT HELL"
+
+[node name="Start" type="Button" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -202.0
+offset_top = -58.0
+offset_right = 202.0
+offset_bottom = 58.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 100
+shortcut = SubResource("Shortcut_c3efx")
+text = "Start Game"
+
+[node name="Music" type="CheckButton" parent="."]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_top = -24.0
+offset_right = 44.0
+grow_vertical = 0
+theme_override_font_sizes/font_size = 80
+shortcut = SubResource("Shortcut_yq38k")
+text = "TOGGLE MUSIC"
+
+[node name="Quit" type="Button" parent="."]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -34.5
+offset_top = -74.0
+offset_right = 34.5
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_font_sizes/font_size = 80
+shortcut = SubResource("Shortcut_gidjr")
+text = "Quit"
+
+[connection signal="pressed" from="Start" to="." method="_on_start_pressed"]
+[connection signal="toggled" from="Music" to="." method="_on_music_toggled"]
+[connection signal="pressed" from="Quit" to="." method="_on_quit_pressed"]
