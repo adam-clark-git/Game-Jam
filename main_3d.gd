@@ -162,6 +162,7 @@ func player_dies():
 	await get_tree().create_timer(2.0).timeout
 	$UI/Retry/Label2.show()
 	$UI/AudioStreamPlayer2.play()
+	
 	get_tree().paused = true
 	$"UI/Retry/Main Menu".show()
 	
@@ -177,7 +178,10 @@ func _on_death_plane_body_entered(body: Node3D) -> void:
 func _on_player_take_damage() -> void:
 	$Player.life = $Player.life - 1
 	_camera_shake(0.2,0.2)
-	print($Player.life)
+	if $Player.life == 2:
+		$Player/Smoke.emitting = true
+	if $Player.life == 1:
+		$Player/Smoke.amount = 200
 
 
 func _on_player_jump_shake() -> void:
