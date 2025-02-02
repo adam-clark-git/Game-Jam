@@ -76,6 +76,7 @@ func animate_tire_tracks(target_speed: Vector3):
 		$TireTracks.emitting = true
 		if $Noises/Skid.playing == false:
 			$Noises/Skid.play()
+		$Noises/Skid.pitch_scale = 0.8 + velocity.length() / 45
 	else:
 		$Noises/Skid.stop()
 		$TireTracks.emitting = false

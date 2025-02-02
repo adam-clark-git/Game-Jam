@@ -143,6 +143,7 @@ func add_point():
 	if (points % 2 == 0):
 		spawn_tesla()
 	spawn_meeple()
+	_camera_shake(0.1,0.1)
 	$PointEarned.play()
 	$PointEarned.pitch_scale = $PointEarned.pitch_scale + 0.1
 	
